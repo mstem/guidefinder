@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GuiFinder example</title>
+<link rel="stylesheet" href="guidefinder.css">
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 860px; margin: 3rem auto; padding: 0 1.5rem; color: #3a3a3a; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  p { color: #6b7280; margin-bottom: 2rem; }
+  .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; }
+</style>
+</head>
+<body>
+
+<h1>GuiFinder example</h1>
+<p>The widget below loads CTFG recommendations based on the text of this page.</p>
+
+<div class="card">
+  <p>
+    This page demonstrates a tool that helps advocates and researchers discover civic technology
+    projects relevant to their work. It uses AI to match free-form text — a project description,
+    a theory of change, or any summary — against the Civic Tech Field Guide directory of
+    technology projects for the public good.
+  </p>
+
+  <div id="recommendations" hidden></div>
+</div>
+
+<script src="guidefinder.js"></script>
+<script>
+  const text = document.querySelector('.card p').textContent;
+  GuiFinder.show(document.getElementById('recommendations'), text);
+</script>
+</body>
+</html>
