@@ -1,6 +1,6 @@
 # guidefinder
 
-A lightweight widget that recommends relevant [Civic Tech Field Guide](https://civictech.guide) categories, issues, and communities for any piece of text.
+A lightweight widget that recommends relevant [Civic Tech Field Guide](https://civictech.guide) [categories](https://app.civictech.guide/categories), [issues](https://app.civictech.guide/issues), and [communities](https://app.civictech.guide/communities) for any piece of text.
 
 Pass it a paragraph, a page summary, or a theory of change — it returns up to 3 matching entries from the CTFG directory with links to explore further.
 
@@ -9,8 +9,8 @@ Pass it a paragraph, a page summary, or a theory of change — it returns up to 
 ## Quick start
 
 ```html
-<link rel="stylesheet" href="https://raw.githubusercontent.com/mstem/guidefinder/main/guidefinder.css">
-<script src="https://raw.githubusercontent.com/mstem/guidefinder/main/guidefinder.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mstem/guidefinder@v1.0.0/guidefinder.css">
+<script src="https://cdn.jsdelivr.net/gh/mstem/guidefinder@v1.0.0/guidefinder.js"></script>
 
 <div id="ctfg-recommendations" hidden></div>
 
@@ -21,6 +21,14 @@ Pass it a paragraph, a page summary, or a theory of change — it returns up to 
   );
 </script>
 ```
+
+Always pin the CDN URL to a release tag or commit hash (`@v1.0.0`, never `@main`) so the code you embed can't change out from under you. For extra protection, add an [`integrity`](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) attribute:
+
+```sh
+openssl dgst -sha384 -binary guidefinder.js | openssl base64 -A
+```
+
+Or skip the CDN entirely — see [Self-hosting](#self-hosting-the-widget) below.
 
 The container stays hidden until results arrive. If no relevant matches are found, or the daily request cap is reached, it stays hidden.
 

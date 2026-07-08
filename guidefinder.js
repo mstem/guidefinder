@@ -23,13 +23,21 @@
     );
   }
 
+  function safeUrl(u) {
+    try {
+      return ['https:', 'http:'].includes(new URL(u).protocol) ? u : '#';
+    } catch (e) {
+      return '#';
+    }
+  }
+
   function renderCards(container, items, heading) {
     const h = escHtml(heading || DEFAULT_HEADING);
     const cards = items.map(c => {
       const name = (c.type === 'issue' || c.type === 'community')
         ? c.name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
         : c.name;
-      return `<a class="gf-card" href="${escHtml(c.softrUrl || '#')}" target="_blank" rel="noopener noreferrer">
+      return `<a class="gf-card" href="${escHtml(safeUrl(c.softrUrl))}" target="_blank" rel="noopener noreferrer">
         <div class="gf-card-name">${escHtml(name)}</div>
         ${c.description ? `<div class="gf-card-desc">${escHtml(c.description)}</div>` : ''}
         <span class="gf-card-cta">Explore →</span>
@@ -69,7 +77,7 @@
         container.setAttribute('hidden', '');
         return;
       }
-      renderCards(container, items, heading);
+      renderCards(container, items.slice(0, limit), heading);
     } catch (err) {
       container.setAttribute('hidden', '');
     }
